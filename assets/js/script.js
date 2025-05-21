@@ -18,12 +18,17 @@ const characters = [
     {
         name: 'Gangue das Lobas',
         description: 'Um grupo de garotas que pratica bullying contra AHCHA na escola. Representa os desafios e obstáculos que AHCHA precisa superar.',
-        image: 'lobasPerfil.png'
+        image: 'loba1.png'
     },
     {
-        name: 'Mundo de AHCHA',
-        description: 'O universo mágico onde AHCHA e Ê vivem suas aventuras, um lugar onde a imaginação e a realidade se misturam.',
-        image: '5.png'
+        name: 'Gangue das Lobas',
+        description: 'Um grupo de garotas que pratica bullying contra AHCHA na escola. Representa os desafios e obstáculos que AHCHA precisa superar.',
+        image: 'loba2.png'
+    },
+    {
+        name: 'Gangue das Lobas',
+        description: 'Um grupo de garotas que pratica bullying contra AHCHA na escola. Representa os desafios e obstáculos que AHCHA precisa superar.',
+        image: 'loba3.png'
     }
 ];
 

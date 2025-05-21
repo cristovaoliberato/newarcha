@@ -112,9 +112,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
     
+    // Function to move to a specific slide
+    function moveToSlide(index) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        description.classList.remove('active');
+        currentIndex = index;
+        
+        slides.forEach((slide, index) => {
+            const position = (index - currentIndex + slideCount) % slideCount;
+            updateSlidePosition(slide, position);
+        });
+        
+        updateCharacterInfo();
+        
+        // Reset animation flag after transition
+        setTimeout(() => {
+            isAnimating = false;
+        }, 500);
+    }
+    
     // Event listeners
     prevBtn.addEventListener('click', () => moveSlides(-1));
     nextBtn.addEventListener('click', () => moveSlides(1));
+    
+    // Add click event listeners to slides
+    slides.forEach((slide, index) => {
+        slide.addEventListener('click', () => {
+            if (!slide.classList.contains('active')) {
+                moveToSlide(index);
+            }
+        });
+    });
     
     // Initialize slider
     initializeSlider();
@@ -147,4 +177,42 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.addEventListener('mouseleave', startAutoplay);
     nextBtn.addEventListener('mouseenter', stopAutoplay);
     nextBtn.addEventListener('mouseleave', startAutoplay);
+});
+
+// Lightbox functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImage = document.querySelector('.lightbox-image');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const conceptImages = document.querySelectorAll('.concept-image');
+
+    // Open lightbox
+    conceptImages.forEach(image => {
+        image.addEventListener('click', () => {
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close lightbox
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
 }); 

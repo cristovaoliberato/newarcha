@@ -197,11 +197,7 @@ body {
     justify-content: center;
     text-align: center;
     padding: 0 2rem;
-    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('background-ahcha.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85));
     position: relative;
     border-radius: 0 0 50px 50px;
     margin-bottom: -100px;
@@ -722,11 +718,9 @@ footer p {
 }
 
 /* Characters Section */
-.vcharacters {
+.characters {
     background: var(--white);
-    padding: 6rem 2rem;
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding: 6rem 2rem 120px 2rem;
     z-index: 3;
     position: relative;
 }
@@ -743,53 +737,22 @@ footer p {
     align-items: center;
     justify-content: center;
     margin-bottom: 3rem;
+    z-index: 1;
+    padding: 0 60px;
 }
 
-.slider-track {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    transition: transform 0.5s ease-in-out;
-    position: relative;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-}
-
-.character-slide {
+.slider-controls {
     position: absolute;
-    width: 200px;
-    height: 300px;
-    transition: all 0.5s ease-in-out;
-    opacity: 0.4;
-    transform: scale(0.8);
-}
-
-.character-slide.active {
-    opacity: 1;
-    transform: scale(1.1);
-    z-index: 2;
-}
-
-.character-slide.prev,
-.character-slide.next {
-    opacity: 0.7;
-    transform: scale(0.9);
-}
-
-.character-image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 0 0 25px 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    top: 50%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
 }
 
 .slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    pointer-events: all;
     width: 50px;
     height: 50px;
     border: none;
@@ -802,20 +765,64 @@ footer p {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 3;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .slider-arrow:hover {
     background: var(--dark-red);
-    transform: translateY(-50%) scale(1.1);
+    transform: scale(1.1);
 }
 
-.prev-btn {
-    left: 20px;
+.slider-track {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: transform 0.5s ease-in-out;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: visible;
+    z-index: 1;
 }
 
-.next-btn {
-    right: 20px;
+.character-slide {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    transition: all 0.5s ease-in-out;
+    opacity: 0.4;
+    transform: scale(0.8);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.character-slide.active {
+    opacity: 1;
+    transform: scale(1.1);
+    z-index: 2;
+    cursor: default;
+}
+
+.character-slide.prev {
+    transform: translateX(-220px) scale(0.9);
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.character-slide.next {
+    transform: translateX(220px) scale(0.9);
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.character-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 0 25px 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .character-description {
@@ -1033,12 +1040,37 @@ footer p {
     padding-bottom: 120px;
     z-index: 5;
     position: relative;
+    overflow: hidden;
+}
+
+.download::before,
+.download::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+    opacity: 0.05;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.download::before {
+    top: -150px;
+    right: -150px;
+}
+
+.download::after {
+    bottom: -150px;
+    left: -150px;
 }
 
 .download-content {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .download-text {
@@ -1063,6 +1095,8 @@ footer p {
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
 }
 
 .store-button {
@@ -1076,16 +1110,35 @@ footer p {
     border-radius: 15px;
     transition: all 0.3s ease;
     min-width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.store-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .store-button:hover {
     transform: translateY(-5px);
-    background: var(--primary-red);
     box-shadow: 0 10px 20px rgba(255, 51, 102, 0.2);
 }
 
-.store-button i {
-    font-size: 2rem;
+.store-button:hover::before {
+    opacity: 1;
+}
+
+.store-button i,
+.store-button .button-text {
+    position: relative;
+    z-index: 1;
 }
 
 .button-text {
@@ -1138,5 +1191,122 @@ footer p {
         width: 100%;
         max-width: 250px;
         justify-content: center;
+    }
+}
+
+/* Remover camada de proteção dos botões */
+.slider-arrow::before {
+    content: none;
+}
+
+/* Garantir que os botões fiquem acima das imagens */
+.slider-arrow {
+    z-index: 10;
+}
+
+/* Concept Art Section */
+.concept-art {
+    background: var(--white);
+    padding: 6rem 2rem;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    z-index: 4;
+    position: relative;
+}
+
+.concept-art-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.concept-image {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 0 0 25px 25px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 51, 102, 0.1);
+    background-color: var(--light-gray);
+    padding: 1rem;
+}
+
+.concept-image:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 51, 102, 0.2);
+    border-color: var(--primary-red);
+}
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: var(--primary-red);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .concept-art-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .concept-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .concept-art-gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .concept-image {
+        height: 200px;
     }
 } 

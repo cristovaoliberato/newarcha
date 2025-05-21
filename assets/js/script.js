@@ -60,32 +60,41 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateSlidePosition(slide, position) {
         const centerX = track.offsetWidth / 2 - slide.offsetWidth / 2;
         let xPosition;
-        
+
         if (position === 0) {
             xPosition = centerX;
             slide.classList.add('active');
             slide.classList.remove('prev', 'next');
+            slide.style.opacity = 1;
+            slide.style.pointerEvents = 'auto';
+            slide.style.display = 'block';
         } else if (position === 1 || position === -slideCount + 1) {
             xPosition = centerX + 220;
             slide.classList.add('next');
             slide.classList.remove('active', 'prev');
+            slide.style.opacity = 0.7;
+            slide.style.pointerEvents = 'auto';
+            slide.style.display = 'block';
         } else if (position === -1 || position === slideCount - 1) {
             xPosition = centerX - 220;
             slide.classList.add('prev');
             slide.classList.remove('active', 'next');
-        } else if (position < -1) {
-            xPosition = centerX - 440;
-            slide.classList.remove('active', 'prev', 'next');
+            slide.style.opacity = 0.7;
+            slide.style.pointerEvents = 'auto';
+            slide.style.display = 'block';
         } else {
+            // Oculta completamente os outros
             xPosition = centerX + 440;
             slide.classList.remove('active', 'prev', 'next');
+            slide.style.opacity = 0;
+            slide.style.pointerEvents = 'none';
+            slide.style.display = 'none'; // <- ESSENCIAL
         }
-        
+
         slide.style.transform = `translateX(${xPosition}px) scale(${position === 0 ? 1.1 : 0.8})`;
         slide.style.zIndex = position === 0 ? 2 : 1;
-        slide.style.opacity = Math.abs(position) <= 1 ? 0.7 : 0.4;
     }
-    
+
     // Update character information
     function updateCharacterInfo() {
         description.classList.remove('active');

@@ -445,7 +445,7 @@ footer {
     position: relative;
     z-index: 5;
     margin-top: -100px;
-    padding-top: 120px;
+    padding-top: 50px;
     border-radius: 50px 50px 0 0;
     text-align: center;
 }
@@ -454,7 +454,18 @@ footer .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+
 }
+.footer-patrocinadores {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-copy {
+    margin-top: 2rem;
+}
+
 
 footer p {
     font-size: 1rem;
@@ -798,7 +809,7 @@ footer p {
 }
 
 .character-slide.active {
-    opacity: 0.4;
+    opacity: 1;
     transform: scale(1.1);
     z-index: 2;
     cursor: default;
